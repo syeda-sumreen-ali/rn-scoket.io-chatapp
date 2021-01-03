@@ -1,16 +1,29 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState, useRef } from 'react'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 import io from "socket.io-client"
 const HomeScreen = () => {
 
-	useEffect(function () {
-		io("http://192.168.0.104:3001"),
-			console.log("i'm a client")
-	}, [])
+	const [messageToSend, setMessageToSend] = useState("");
+	const socket = useRef(null)
+
+	useEffect(() => {
+		socket.current = io("http://192.168.0.104:3001")
+	}, []);
+
+	const sendMessage = () => {
+		socket.current.emit("message", messageToSend);
+		setMessageToSend("");
+	}
 
 	return (
 		<View>
 			<Text>hello world</Text>
+			<TextInput
+				placeholder="Enter chat message..."
+				value={messageToSend}
+				onChangeText={(val) => setMessageToSend(val)}
+				onSubmitEditing={sendMessage}
+			/>
 		</View>
 	)
 }

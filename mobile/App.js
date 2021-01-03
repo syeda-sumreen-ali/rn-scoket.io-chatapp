@@ -3,9 +3,7 @@ import HomeScreen from './screen/HomeScreen'
 
 const App = () => {
   return (
-    <View>
-      <HomeScreen />
-    </View>
+    <HomeScreen />
   )
 }
 
