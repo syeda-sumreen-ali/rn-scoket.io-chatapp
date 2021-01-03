@@ -14,4 +14,4 @@
 
 #### 5 sending chat message to Socket.io backend from React Native
 
-
+#### 6 receive messages in React Native from Socket.IO
